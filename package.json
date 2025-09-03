@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cz": "czg"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "@eslint/js": "^9.33.0",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/node": "^24.3.0",
+    "czg": "^1.12.0",
     "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-react": "^7.37.5",
