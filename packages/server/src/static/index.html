@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Clip Hub - Tasks</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen bg-gray-50 text-gray-900">
+    <div class="max-w-4xl mx-auto p-4 sm:p-6">
+      <header class="flex items-center justify-between mb-4">
+        <h1 class="text-xl sm:text-2xl font-semibold">Clip Hub - Tasks</h1>
+        <div class="text-sm text-gray-500 hidden sm:block">
+          Author:
+          <a href="https://github.com/CodeByZack/ClipHub" target="_blank" rel="noopener noreferrer"
+            >CodeByZack</a
+          >
+        </div>
+      </header>
+
+      <section class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+        <div class="bg-white p-3 rounded-lg shadow-sm text-center">
+          <div class="text-xs text-gray-500">正在下载</div>
+          <div id="downloading" class="text-lg font-medium text-blue-600">0</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg shadow-sm text-center">
+          <div class="text-xs text-gray-500">下载成功</div>
+          <div id="success" class="text-lg font-medium text-green-600">0</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg shadow-sm text-center">
+          <div class="text-xs text-gray-500">下载失败</div>
+          <div id="failed" class="text-lg font-medium text-red-600">0</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg shadow-sm text-center">
+          <div class="text-xs text-gray-500">总任务数</div>
+          <div id="total" class="text-lg font-medium">0</div>
+        </div>
+      </section>
+
+      <section class="bg-white p-4 rounded-lg shadow-sm mb-4">
+        <form id="taskForm" class="flex flex-col sm:flex-row gap-3">
+          <input
+            id="url"
+            type="text"
+            placeholder="视频或音频链接 (url)"
+            required
+            class="flex-1 border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
+          />
+          <select id="type" class="w-32 border rounded-md px-2 py-2 text-sm">
+            <option value="video">video</option>
+            <option value="audio">audio</option>
+          </select>
+          <button
+            type="submit"
+            class="bg-indigo-600 text-white px-3 py-2 rounded-md text-sm hover:bg-indigo-500"
+          >
+            添加下载任务
+          </button>
+        </form>
+      </section>
+
+      <section class="mb-4">
+        <!-- Tabs -->
+        <div class="bg-white rounded-lg shadow-sm">
+          <div class="border-b px-4">
+            <nav class="flex -mb-px space-x-4" role="tablist" aria-label="Tabs">
+              <button
+                id="tab-tasks-btn"
+                class="py-3 px-4 border-b-2 border-transparent text-sm font-medium text-gray-600 hover:text-gray-800"
+                data-tab="tasks"
+                role="tab"
+                aria-selected="true"
+              >
+                任务列表
+              </button>
+              <button
+                id="tab-success-btn"
+                class="py-3 px-4 border-b-2 border-transparent text-sm font-medium text-gray-600 hover:text-gray-800"
+                data-tab="success"
+                role="tab"
+                aria-selected="false"
+              >
+                成功日志
+              </button>
+              <button
+                id="tab-failed-btn"
+                class="py-3 px-4 border-b-2 border-transparent text-sm font-medium text-gray-600 hover:text-gray-800"
+                data-tab="failed"
+                role="tab"
+                aria-selected="false"
+              >
+                失败日志
+              </button>
+            </nav>
+          </div>
+
+          <!-- Panels -->
+          <div id="tab-tasks" class="p-4 block" role="tabpanel">
+            <h4 class="text-sm font-medium mb-2 text-gray-700">正在下载的任务</h4>
+            <div class="overflow-auto">
+              <table id="taskTable" class="min-w-full text-sm">
+                <colgroup>
+                  <col />
+                  <col />
+                  <col style="width: 6rem" />
+                  <col style="width: 8rem" />
+                </colgroup>
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-3 py-2 text-left">ID</th>
+                    <th class="px-3 py-2 text-left">URL</th>
+                    <th class="px-3 py-2 text-left">类型</th>
+                    <th class="px-3 py-2 text-left">状态</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y"></tbody>
+              </table>
+              <div id="emptyState" class="p-4 text-center text-gray-500 hidden">
+                当前没有正在下载的任务。
+              </div>
+            </div>
+          </div>
+
+          <div id="tab-success" class="p-4 hidden" role="tabpanel">
+            <h4 class="text-sm font-medium mb-2 text-gray-700">成功日志</h4>
+            <div class="bg-black/5 p-2 rounded-md text-xs max-h-56 overflow-auto">
+              <pre id="successLog" class="whitespace-pre"></pre>
+            </div>
+          </div>
+
+          <div id="tab-failed" class="p-4 hidden" role="tabpanel">
+            <h4 class="text-sm font-medium mb-2 text-gray-700">失败日志</h4>
+            <div class="bg-black/5 p-2 rounded-md text-xs max-h-56 overflow-auto">
+              <pre id="failedLog" class="whitespace-pre"></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
